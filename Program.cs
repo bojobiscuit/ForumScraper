@@ -12,7 +12,7 @@ namespace ForumScraper
         private static string url;
 
         static void Main(string[] args)
-        {
+        { 
             Console.WriteLine("Start");
 
             var pages = new List<Page>();
