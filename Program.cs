@@ -12,14 +12,15 @@ namespace ForumScraper
         private static string url;
 
         static void Main(string[] args)
-        { 
-            Console.WriteLine("Start");
+        {
 
             var pages = new List<Page>();
             var posts = new List<Post>();
 
-            // Online Pages
-            url = "http://simulationhockey.com/showthread.php?tid=94401";
+            Console.WriteLine("Paste the link to the forum thread");
+            url = Console.ReadLine();
+            // url = "http://simulationhockey.com/showthread.php?tid=94401";
+            Console.WriteLine("Scraping data from " + url);
             pages = GetPagesOnline(url);
 
             // Local Files (testing)
@@ -35,6 +36,9 @@ namespace ForumScraper
             posts = posts.Skip(1).OrderBy(a => a.Username).ToList();
 
             CreateOutput(posts);
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
 
         private static List<Page> GetPagesOnline(string url)
@@ -110,7 +114,9 @@ namespace ForumScraper
             Console.Write(" Done");
             Console.WriteLine();
 
-            htmlDocument.Save("output/threadData.html");
+            htmlDocument.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "threadOutput.html"));
+            Console.WriteLine("Output is on the desktop as threadOutput.html");
+            Console.WriteLine("\"when in doubt, do not rub one out\" - .bojo");
         }
 
         private static int WordCount(string whole_text)
