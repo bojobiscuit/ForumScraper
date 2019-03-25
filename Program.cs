@@ -97,6 +97,10 @@ namespace ForumScraper
                 tableCell.InnerHtml = WordCount(post.Message).ToString();
                 tableRow.ChildNodes.Add(tableCell);
 
+                tableCell = HtmlNode.CreateNode("<td style=\"white-space: nowrap;\"></td>");
+                tableCell.InnerHtml = post.DateText;
+                tableRow.ChildNodes.Add(tableCell);
+
                 tableCell = HtmlNode.CreateNode("<td></td>");
                 foreach (var imageLink in post.ImageLinks)
                     tableCell.InnerHtml += "<a href=\"" + imageLink + "\" target=\"_blank\"><img src=\"" + imageLink + "\" /></a><br />";
@@ -144,6 +148,7 @@ namespace ForumScraper
             var profileArea = postLeft.Descendants("span").First(a => a.HasClass("profile-username"));
             var nameArea = profileArea.Descendants("a").First();
             var messageArea = postRight.Descendants().First(a => a.HasClass("post_body"));
+            var dateArea = postRight.Descendants().First(a => a.HasClass("post_date"));
             var signature = messageArea.Descendants("div").FirstOrDefault(a => a.HasClass("hide"));
 
             // removing signatures from post
@@ -153,8 +158,8 @@ namespace ForumScraper
             var imageLinks = messageArea.Descendants("img").Select(a => a.GetAttributeValue("src", "none"));
 
             post.Username = nameArea.InnerText.Trim();
-            post.Message = messageArea.InnerText.Trim();
-            post.Message = RemoveImagePlaceholders(post.Message);
+            post.Message = RemoveImagePlaceholders(messageArea.InnerText.Trim());
+            post.DateText = dateArea.InnerText.Trim();
             post.ImageLinks = imageLinks.ToList();
 
             return post;

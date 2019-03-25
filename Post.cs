@@ -8,6 +8,7 @@ namespace ForumScraper
         public string Username { get; set; }
         public string Message { get; set; }
         public string PostId { get; set; }
+        public string DateText { get; set; }
         public IEnumerable<string> ImageLinks { get; set; }
 
 
