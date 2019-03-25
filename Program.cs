@@ -9,6 +9,9 @@ namespace ForumScraper
 {
     class Program
     {
+        // To publish:
+        // dotnet publish -c Release -r win10-x64
+
         private static string url;
 
         static void Main(string[] args)
