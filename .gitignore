@@ -332,3 +332,9 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+
+
+localfiles/* linguist-vendored
+output/* linguist-vendored
+.vscode/* linguist-vendored
